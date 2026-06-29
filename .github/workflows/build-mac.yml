@@ -31,6 +31,13 @@ jobs:
           chmod +x ./build_mac.sh
           ./build_mac.sh
 
+      - name: Smoke test packaged app
+        run: |
+          test -x dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico
+          test -f dist/AssistenteJuridico.app/Contents/Info.plist
+          codesign --verify --deep --strict dist/AssistenteJuridico.app
+          dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico --self-test
+
       - name: Package app
         run: |
           cd dist

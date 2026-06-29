@@ -367,6 +367,48 @@ def carregar_config_monitoramento() -> dict:
     return {**DEFAULT_MONITOR_CONFIG, **config}
 
 
+def run_self_test() -> int:
+    try:
+        ensure_project_files()
+        config = load_config()
+        monitor_config = carregar_config_monitoramento()
+
+        missing_prompts = [
+            str(PROMPTS_DIR / filename)
+            for filename in DEFAULT_PROMPTS
+            if not (PROMPTS_DIR / filename).exists()
+        ]
+        if missing_prompts:
+            raise RuntimeError("Prompts ausentes: " + ", ".join(missing_prompts))
+
+        missing_dirs = [
+            str(path)
+            for path in (PROMPTS_DIR, REPORTS_DIR, CONFIG_DIR, BACKUPS_DIR)
+            if not path.is_dir()
+        ]
+        if missing_dirs:
+            raise RuntimeError("Pastas ausentes: " + ", ".join(missing_dirs))
+
+        result = {
+            "status": "ok",
+            "platform": platform.system(),
+            "frozen": bool(getattr(sys, "frozen", False)),
+            "base_dir": str(BASE_DIR),
+            "bundled_dir": str(BUNDLED_DIR),
+            "prompts_dir": str(PROMPTS_DIR),
+            "reports_dir": str(REPORTS_DIR),
+            "config_file": str(CONFIG_FILE),
+            "prompt_count": len(list(PROMPTS_DIR.glob("*.txt"))),
+            "modo_abertura": config.get("modo_abertura"),
+            "monitoramento_ativo": monitor_config.get("monitoramento_ativo"),
+        }
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    except Exception as exc:
+        print(f"SELF_TEST_FAILED: {exc}", file=sys.stderr)
+        return 1
+
+
 def formatar_data_hora(iso_value: str | None) -> str:
     if not iso_value:
         return "Nunca"
@@ -2141,4 +2183,6 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    if "--self-test" in sys.argv:
+        raise SystemExit(run_self_test())
     main()
