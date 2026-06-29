@@ -16,8 +16,12 @@ jobs:
       matrix:
         include:
           - arch: arm64
-            runner: macos-latest
+            binary_arch: arm64
+            python_arch: arm64
+            runner: macos-15
           - arch: intel
+            binary_arch: x86_64
+            python_arch: x64
             runner: macos-15-intel
 
     steps:
@@ -28,11 +32,13 @@ jobs:
         run: |
           sw_vers
           uname -m
+          sysctl -n machdep.cpu.brand_string
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          architecture: ${{ matrix.python_arch }}
 
       - name: Install dependencies
         run: |
@@ -50,6 +56,7 @@ jobs:
           test -x dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico
           test -f dist/AssistenteJuridico.app/Contents/Info.plist
           file dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico
+          lipo -archs dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico | grep -qw "${{ matrix.binary_arch }}"
           codesign --verify --deep --strict dist/AssistenteJuridico.app
           dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico --self-test
           dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico --ui-smoke-test
@@ -57,7 +64,13 @@ jobs:
       - name: Package app
         run: |
           cd dist
-          ditto -c -k --sequesterRsrc --keepParent AssistenteJuridico.app AssistenteJuridico_macOS_${{ matrix.arch }}.zip
+          PACKAGE_DIR="AssistenteJuridico_macOS_${{ matrix.arch }}"
+          rm -rf "$PACKAGE_DIR"
+          mkdir "$PACKAGE_DIR"
+          cp -R AssistenteJuridico.app "$PACKAGE_DIR/"
+          cp ../fix_mac_app.sh "$PACKAGE_DIR/"
+          chmod +x "$PACKAGE_DIR/fix_mac_app.sh"
+          ditto -c -k --sequesterRsrc --keepParent "$PACKAGE_DIR" "AssistenteJuridico_macOS_${{ matrix.arch }}.zip"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

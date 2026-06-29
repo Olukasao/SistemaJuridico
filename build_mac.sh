@@ -22,8 +22,9 @@ fi
 python3 -m PyInstaller "${PYINSTALLER_ARGS[@]}" app.py
 
 if [ -d "dist/AssistenteJuridico.app" ]; then
-  codesign --force --deep --sign - "dist/AssistenteJuridico.app" || true
+  chmod +x "dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico"
   xattr -cr "dist/AssistenteJuridico.app" || true
+  codesign --force --deep --sign - "dist/AssistenteJuridico.app" || true
 fi
 
 if [ -d "$HOME/Desktop" ] && [ -d "dist/AssistenteJuridico.app" ]; then

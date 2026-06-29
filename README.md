@@ -33,6 +33,8 @@ chmod +x ./build_mac.sh
 
 O script gera `dist/AssistenteJuridico.app` e copia o app para a Mesa (`Desktop`), quando disponível.
 
+No GitHub Actions, baixe o artifact `AssistenteJuridico_macOS_arm64` para MacBook com chip Apple Silicon/M1/M2/M3/M4. O zip contem uma pasta com `AssistenteJuridico.app` e `fix_mac_app.sh`.
+
 Importante: o build de macOS precisa ser feito em um Mac. O PyInstaller não gera `.app` macOS corretamente a partir do Windows.
 
 Se o macOS exibir erro como **"app danificado"**, **"não pode ser aberto"** ou **"desenvolvedor não verificado"**, remova a quarentena do app baixado e abra novamente:
@@ -40,6 +42,13 @@ Se o macOS exibir erro como **"app danificado"**, **"não pode ser aberto"** ou 
 ```bash
 xattr -cr ~/Desktop/AssistenteJuridico.app
 open ~/Desktop/AssistenteJuridico.app
+```
+
+Se ainda aparecer **"O aplicativo AssistenteJuridico nao pode ser aberto"**, rode o reparo completo:
+
+```bash
+chmod +x ./fix_mac_app.sh
+./fix_mac_app.sh ~/Desktop/AssistenteJuridico.app
 ```
 
 Se o app estiver em outra pasta, troque o caminho no comando. Em alguns Macs também funciona clicar com o botão direito no app e escolher **Abrir**.
