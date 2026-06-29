@@ -6,16 +6,18 @@ cd "$(dirname "$0")"
 python3 -m pip install -r requirements.txt
 python3 -m pip install pyinstaller
 
-ICON_ARGS=()
 if [ -f "assets/app.icns" ]; then
-  ICON_ARGS=(--icon "assets/app.icns")
+  python3 -m PyInstaller \
+    --windowed \
+    --name AssistenteJuridico \
+    --icon "assets/app.icns" \
+    app.py
+else
+  python3 -m PyInstaller \
+    --windowed \
+    --name AssistenteJuridico \
+    app.py
 fi
-
-python3 -m PyInstaller \
-  --windowed \
-  --name AssistenteJuridico \
-  "${ICON_ARGS[@]}" \
-  app.py
 
 if [ -d "$HOME/Desktop" ] && [ -d "dist/AssistenteJuridico.app" ]; then
   rm -rf "$HOME/Desktop/AssistenteJuridico.app"
