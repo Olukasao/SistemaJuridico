@@ -1,11 +1,15 @@
-Execute a tarefa: Rotina Jurídica — Astrea + Jusbrasil + Peças + Excel.
+Abra o site do Astrea no Chrome.
+Eu vou fazer login manualmente.
+Depois que eu estiver logado, analise a pagina atual do Astrea para verificar prazos, tarefas, publicacoes, intimacoes, processos, responsaveis internos e pendencias.
 
-Acesse primeiro o Astrea para verificar prazos, tarefas, publicações, intimações, processos, responsáveis internos e pendências. Use os prazos do Astrea como referência principal quando existirem.
+Use os prazos do Astrea como referencia principal quando existirem.
 
-Depois acesse o Jusbrasil para complementar ou confirmar publicações, intimações, movimentações e processos.
+Depois abra o Jusbrasil no Chrome.
+Eu vou fazer login manualmente, se for necessario.
+Depois que eu estiver logado, complemente ou confirme publicacoes, intimacoes, movimentacoes e processos.
 
-Se for solicitada elaboração de peça jurídica, auxilie na criação de minuta nas áreas previdenciária, trabalhista ou cível, sempre verificando o prazo da tarefa específica, usando apenas fatos e documentos disponíveis, legislação vigente brasileira e sem inventar fatos, provas, prazos, jurisprudência ou fundamentos.
+Se for solicitada elaboracao de peca juridica, auxilie na criacao de minuta nas areas previdenciaria, trabalhista ou civel, sempre verificando o prazo da tarefa especifica, usando apenas fatos e documentos disponiveis, legislacao vigente brasileira e sem inventar fatos, provas, prazos, jurisprudencia ou fundamentos.
 
-Ao final, gere relatório na conversa e planilha Excel .xlsx organizada por prioridade na pasta C:\Assistente-Juridico\relatorios.
+Ao final, gere relatorio na conversa e planilha Excel .xlsx organizada por prioridade na pasta C:\Assistente-Juridico\relatorios.
 
-Toda informação deve ser tratada como apoio operacional e precisa de validação humana da advogada.
+Toda informacao deve ser tratada como apoio operacional e precisa de validacao humana da advogada.

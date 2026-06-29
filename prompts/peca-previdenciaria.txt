@@ -1,7 +1,15 @@
-Elaborar minuta de peça previdenciária.
+Abra o site do Astrea no Chrome.
+Eu vou fazer login manualmente.
+Depois que eu estiver logado, analise a pagina atual do Astrea para verificar a tarefa, o processo, o cliente, a parte contraria, o prazo e os documentos disponiveis.
 
-Antes de redigir, verificar o prazo da tarefa no Astrea, Jusbrasil, publicação, intimação ou documento enviado. Identificar tipo de peça, processo, cliente, parte contrária, fase processual, benefício envolvido, documentos disponíveis, provas e pontos controvertidos.
+Depois abra o Jusbrasil no Chrome, se precisar confirmar publicacoes, intimacoes, movimentacoes ou prazo.
+Eu vou fazer login manualmente, se for necessario.
+Depois que eu estiver logado, use apenas as informacoes localizadas ou fornecidas.
 
-Usar apenas informações fornecidas ou localizadas. Não inventar fatos, documentos, provas, prazos, jurisprudência ou fundamentos. Fundamentar com legislação vigente brasileira aplicável ao Direito Previdenciário.
+Elaborar minuta de peca previdenciaria.
 
-A peça deve ser entregue como minuta para revisão da advogada, com resumo da tarefa, prazo encontrado, fonte do prazo, riscos, pontos de validação e checklist de documentos.
+Antes de redigir, verificar o prazo da tarefa no Astrea, Jusbrasil, publicacao, intimacao ou documento enviado. Identificar tipo de peca, processo, cliente, parte contraria, fase processual, beneficio envolvido, documentos disponiveis, provas e pontos controvertidos.
+
+Usar apenas informacoes fornecidas ou localizadas. Nao inventar fatos, documentos, provas, prazos, jurisprudencia ou fundamentos. Fundamentar com legislacao vigente brasileira aplicavel ao Direito Previdenciario.
+
+A peca deve ser entregue como minuta para revisao da advogada, com resumo da tarefa, prazo encontrado, fonte do prazo, riscos, pontos de validacao e checklist de documentos.

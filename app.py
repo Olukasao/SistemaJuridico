@@ -69,8 +69,10 @@ DEFAULT_CONFIG = {
     "incluir_login_manual": False,
     "astrea_login_url": "",
     "astrea_usuario": "",
+    "astrea_senha": "",
     "jusbrasil_login_url": "",
     "jusbrasil_usuario": "",
+    "jusbrasil_senha": "",
     "reports_folder": REPORTS_OUTPUT_HINT,
 }
 
@@ -910,8 +912,8 @@ class AssistenteJuridicoApp:
         self.astrea_usuario_var = tk.StringVar(value=str(load_config().get("astrea_usuario", "")))
         self.jusbrasil_login_url_var = tk.StringVar(value=str(load_config().get("jusbrasil_login_url", "")))
         self.jusbrasil_usuario_var = tk.StringVar(value=str(load_config().get("jusbrasil_usuario", "")))
-        self.astrea_senha_var = tk.StringVar()
-        self.jusbrasil_senha_var = tk.StringVar()
+        self.astrea_senha_var = tk.StringVar(value=str(load_config().get("astrea_senha", "")))
+        self.jusbrasil_senha_var = tk.StringVar(value=str(load_config().get("jusbrasil_senha", "")))
         self.report_search_var = tk.StringVar()
         self.report_period_var = tk.StringVar(value="Todos")
         self.report_type_var = tk.StringVar(value="Todos")
@@ -1482,7 +1484,7 @@ class AssistenteJuridicoApp:
         tk.Label(login_panel, text="Login manual Astrea/Jusbrasil", font=("Segoe UI", 14, "bold"), fg=self.COLORS["navy"], bg=self.COLORS["white"]).pack(anchor="w")
         tk.Label(
             login_panel,
-            text="Informe apenas email/usuário para orientar o Claude. Senhas não são salvas nem enviadas no prompt; a usuária deve digitá-las manualmente.",
+            text="Quando email e senha forem preenchidos, o app inclui no prompt o pedido para o Claude fazer login. Se algum dado faltar, o prompt orienta login manual.",
             font=("Segoe UI", 9),
             fg=self.COLORS["muted"],
             bg=self.COLORS["white"],
@@ -1515,7 +1517,7 @@ class AssistenteJuridicoApp:
 
         tk.Checkbutton(
             login_panel,
-            text="Incluir instrução de login manual nos prompts",
+            text="Incluir instruções de login nos prompts",
             variable=self.incluir_login_manual_var,
             command=self.save_login_manual_options,
             bg=self.COLORS["white"],
@@ -1523,7 +1525,7 @@ class AssistenteJuridicoApp:
             activebackground=self.COLORS["white"],
             font=("Segoe UI", 10),
         ).pack(anchor="w", pady=(10, 4))
-        self.styled_button(login_panel, "Salvar dados de login manual", self.save_login_manual_options, "outline").pack(anchor="w", pady=(6, 0))
+        self.styled_button(login_panel, "Salvar dados de login", self.save_login_manual_options, "outline").pack(anchor="w", pady=(6, 0))
 
         options = self.create_panel(content)
         options.pack(fill=tk.X)
@@ -1705,7 +1707,7 @@ class AssistenteJuridicoApp:
 
         tk.Label(
             block,
-            text="Senha não é salva e não entra no prompt.",
+            text="Senha fica mascarada no app, mas entra no prompt quando salva.",
             font=("Segoe UI", 8),
             fg=self.COLORS["muted"],
             bg=self.COLORS["soft"],
@@ -1848,41 +1850,51 @@ class AssistenteJuridicoApp:
 
     def apply_login_manual_context(self, prompt_text: str) -> str:
         config = load_config()
-        if not config.get("incluir_login_manual", False):
-            return prompt_text
 
         astrea_url = str(config.get("astrea_login_url", "")).strip()
         astrea_usuario = str(config.get("astrea_usuario", "")).strip()
+        astrea_senha = self.astrea_senha_var.get().strip() or str(config.get("astrea_senha", "")).strip()
         jusbrasil_url = str(config.get("jusbrasil_login_url", "")).strip()
         jusbrasil_usuario = str(config.get("jusbrasil_usuario", "")).strip()
-        astrea_senha_informada = bool(self.astrea_senha_var.get().strip())
-        jusbrasil_senha_informada = bool(self.jusbrasil_senha_var.get().strip())
+        jusbrasil_senha = self.jusbrasil_senha_var.get().strip() or str(config.get("jusbrasil_senha", "")).strip()
+        tem_login_completo = bool((astrea_usuario and astrea_senha) or (jusbrasil_usuario and jusbrasil_senha))
 
-        if not any([astrea_url, astrea_usuario, astrea_senha_informada, jusbrasil_url, jusbrasil_usuario, jusbrasil_senha_informada]):
+        if not config.get("incluir_login_manual", False) and not tem_login_completo:
+            return prompt_text
+
+        if not any([astrea_url, astrea_usuario, astrea_senha, jusbrasil_url, jusbrasil_usuario, jusbrasil_senha]):
             return prompt_text
 
         login_lines = [
             "",
             "",
-            "INSTRUÇÕES DE LOGIN MANUAL:",
-            "Use estes dados apenas para orientar a navegação. Não salve senhas, não exponha senhas na conversa e aguarde a usuária digitar a senha manualmente quando necessário.",
+            "INSTRUÇÕES DE LOGIN:",
+            "Use estes dados apenas para acessar os sistemas nesta rotina. Não salve senhas, não exponha senhas na conversa e não altere dados sem autorização.",
         ]
 
-        if astrea_url or astrea_usuario or astrea_senha_informada:
+        if astrea_url or astrea_usuario or astrea_senha:
             login_lines.append("Astrea:")
             if astrea_url:
                 login_lines.append(f"- Entrar no site: {astrea_url}")
             if astrea_usuario:
                 login_lines.append(f"- Usar email/usuário: {astrea_usuario}")
-            login_lines.append("- Fazer login no Astrea aguardando a usuária preencher a senha manualmente.")
+            if astrea_usuario and astrea_senha:
+                login_lines.append(f"- Senha: {astrea_senha}")
+                login_lines.append("- Fazer login automaticamente no Astrea usando o email/usuário e a senha acima.")
+            else:
+                login_lines.append("- Fazer login no Astrea aguardando a usuária preencher os dados que faltarem manualmente.")
 
-        if jusbrasil_url or jusbrasil_usuario or jusbrasil_senha_informada:
+        if jusbrasil_url or jusbrasil_usuario or jusbrasil_senha:
             login_lines.append("Jusbrasil:")
             if jusbrasil_url:
                 login_lines.append(f"- Entrar no site: {jusbrasil_url}")
             if jusbrasil_usuario:
                 login_lines.append(f"- Usar email/usuário: {jusbrasil_usuario}")
-            login_lines.append("- Fazer login no Jusbrasil aguardando a usuária preencher a senha manualmente.")
+            if jusbrasil_usuario and jusbrasil_senha:
+                login_lines.append(f"- Senha: {jusbrasil_senha}")
+                login_lines.append("- Fazer login automaticamente no Jusbrasil usando o email/usuário e a senha acima.")
+            else:
+                login_lines.append("- Fazer login no Jusbrasil aguardando a usuária preencher os dados que faltarem manualmente.")
 
         return prompt_text.rstrip() + "\n".join(login_lines)
 
@@ -2065,13 +2077,20 @@ class AssistenteJuridicoApp:
 
     def save_login_manual_options(self) -> None:
         config = load_config()
-        config["incluir_login_manual"] = bool(self.incluir_login_manual_var.get())
         config["astrea_login_url"] = self.astrea_login_url_var.get().strip()
         config["astrea_usuario"] = self.astrea_usuario_var.get().strip()
+        config["astrea_senha"] = self.astrea_senha_var.get().strip()
         config["jusbrasil_login_url"] = self.jusbrasil_login_url_var.get().strip()
         config["jusbrasil_usuario"] = self.jusbrasil_usuario_var.get().strip()
+        config["jusbrasil_senha"] = self.jusbrasil_senha_var.get().strip()
+        tem_login_completo = bool(
+            (config["astrea_usuario"] and config["astrea_senha"])
+            or (config["jusbrasil_usuario"] and config["jusbrasil_senha"])
+        )
+        config["incluir_login_manual"] = bool(self.incluir_login_manual_var.get() or tem_login_completo)
+        self.incluir_login_manual_var.set(config["incluir_login_manual"])
         save_config(config)
-        self.status_var.set("Dados de login manual salvos. Senhas não são armazenadas nem enviadas.")
+        self.status_var.set("Dados de login salvos. Quando houver email e senha, eles entram no prompt.")
 
     def save_modo_abertura(self) -> None:
         config = load_config()

@@ -1,91 +1,97 @@
-Verificar novas pendências jurídicas desde a última base registrada.
+Abra o site do Astrea no Chrome.
+Eu vou fazer login manualmente.
+Depois que eu estiver logado, analise a pagina atual do Astrea.
 
-Acesse primeiro o Astrea e depois o Jusbrasil, aguardando login manual se necessário.
+Depois abra o Jusbrasil no Chrome.
+Eu vou fazer login manualmente, se for necessario.
+Depois que eu estiver logado, analise a pagina atual do Jusbrasil.
 
 Objetivo:
-Buscar somente novas pendências, novas tarefas, novas publicações, novas intimações, novas movimentações ou novos prazos que surgiram depois da última verificação/base inicial.
+Verificar novas pendencias juridicas desde a ultima base registrada.
+
+Buscar somente novas pendencias, novas tarefas, novas publicacoes, novas intimacoes, novas movimentacoes ou novos prazos que surgiram depois da ultima verificacao/base inicial.
 
 Importante:
-Não listar novamente pendências antigas já conhecidas.
-Não trazer tarefas antigas que já estavam na base.
-Não repetir publicações, intimações ou movimentações já registradas.
-Mostrar apenas o que for novo ou o que sofreu alteração relevante.
+Nao listar novamente pendencias antigas ja conhecidas.
+Nao trazer tarefas antigas que ja estavam na base.
+Nao repetir publicacoes, intimacoes ou movimentacoes ja registradas.
+Mostrar apenas o que for novo ou o que sofreu alteracao relevante.
 
-Use como referência a última base/snapshot de pendências, quando disponível:
+Use como referencia a ultima base/snapshot de pendencias, quando disponivel:
 configuracoes/snapshot_pendencias.json
 
 Verifique no Astrea:
 
 * Novas tarefas;
 * Novos prazos;
-* Novas publicações;
-* Novas intimações;
-* Novas movimentações;
-* Alterações relevantes em tarefas existentes;
-* Novas pendências vinculadas a processos.
+* Novas publicacoes;
+* Novas intimacoes;
+* Novas movimentacoes;
+* Alteracoes relevantes em tarefas existentes;
+* Novas pendencias vinculadas a processos.
 
 Verifique no Jusbrasil:
 
-* Novas publicações;
-* Novas intimações;
-* Novas movimentações processuais;
+* Novas publicacoes;
+* Novas intimacoes;
+* Novas movimentacoes processuais;
 * Novos processos relacionados aos dados consultados;
 * Novos prazos informados.
 
-Critério de novidade:
-Considere novo apenas o item que não existia na base anterior ou que teve alteração relevante desde a última verificação.
+Criterio de novidade:
+Considere novo apenas o item que nao existia na base anterior ou que teve alteracao relevante desde a ultima verificacao.
 
-Para cada nova pendência encontrada, registrar:
-Cliente/Parte | Número do Processo | Sistema de Origem | Tribunal | Tipo | Matéria | Data Encontrada | Prazo Encontrado | Fonte do Prazo | Prioridade | Status | Resumo | Link/Fonte | Observações
+Para cada nova pendencia encontrada, registrar:
+Cliente/Parte | Numero do Processo | Sistema de Origem | Tribunal | Tipo | Materia | Data Encontrada | Prazo Encontrado | Fonte do Prazo | Prioridade | Status | Resumo | Link/Fonte | Observacoes
 
 Prioridade:
 Urgente:
 
 * Prazo vencido;
 * Prazo para hoje;
-* Prazo para amanhã;
-* Nova publicação ou intimação com risco de prazo;
-* Nova tarefa crítica.
+* Prazo para amanha;
+* Nova publicacao ou intimacao com risco de prazo;
+* Nova tarefa critica.
 
 Alta:
 
-* Novo prazo próximo;
-* Nova movimentação relevante;
+* Novo prazo proximo;
+* Nova movimentacao relevante;
 * Nova tarefa importante;
-* Nova publicação/intimação que exige análise.
+* Nova publicacao/intimacao que exige analise.
 
-Média:
+Media:
 
-* Nova movimentação sem urgência aparente;
-* Nova pendência de acompanhamento.
+* Nova movimentacao sem urgencia aparente;
+* Nova pendencia de acompanhamento.
 
 Baixa:
 
-* Nova informação apenas consultiva ou sem ação imediata.
+* Nova informacao apenas consultiva ou sem acao imediata.
 
 Regras:
 
-* Não inventar prazos processuais.
-* Não tomar decisão jurídica final.
-* Não alterar nada no Astrea ou Jusbrasil.
-* Não protocolar nada.
-* Não salvar senhas.
-* Não baixar arquivos sem autorização.
+* Nao inventar prazos processuais.
+* Nao tomar decisao juridica final.
+* Nao alterar nada no Astrea ou Jusbrasil.
+* Nao protocolar nada.
+* Nao salvar senhas.
+* Nao baixar arquivos sem autorizacao.
 * Copiar exatamente os prazos encontrados.
-* Se não houver prazo, marcar como 'prazo não localizado'.
-* Tudo que envolver prazo, publicação ou intimação deve ser marcado como 'necessita validação humana'.
+* Se nao houver prazo, marcar como 'prazo nao localizado'.
+* Tudo que envolver prazo, publicacao ou intimacao deve ser marcado como 'necessita validacao humana'.
 
-Se não houver novas pendências:
+Se nao houver novas pendencias:
 Responder exatamente:
-'Nenhuma nova pendência localizada desde a última verificação.'
+'Nenhuma nova pendencia localizada desde a ultima verificacao.'
 
-Se houver novas pendências:
+Se houver novas pendencias:
 
 1. Apresentar resumo por prioridade.
 2. Gerar tabela das novidades.
 3. Atualizar ou gerar nova base/snapshot incluindo os itens novos.
-4. Gerar Excel .xlsx apenas com as novas pendências encontradas.
-5. Salvar, se possível, em:
+4. Gerar Excel .xlsx apenas com as novas pendencias encontradas.
+5. Salvar, se possivel, em:
    C:\Assistente-Juridico\relatorios\
 
 Nome sugerido do Excel:

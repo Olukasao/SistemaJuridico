@@ -1,7 +1,11 @@
-Execute a rotina Jusbrasil.
+Abra o site do Astrea no Chrome.
+Eu vou fazer login manualmente.
+Depois que eu estiver logado, analise a pagina atual do Astrea para identificar dados uteis da tarefa, processo, parte, publicacao ou prazo.
 
-Acesse o Jusbrasil, aguarde login manual se necessário e consulte publicações, intimações, movimentações e processos usando os dados fornecidos pela advogada: nome da parte, CPF/CNPJ, número do processo, advogado, tribunal, comarca ou palavra-chave.
+Depois abra o Jusbrasil no Chrome.
+Eu vou fazer login manualmente, se for necessario.
+Depois que eu estiver logado, consulte publicacoes, intimacoes, movimentacoes e processos usando os dados disponiveis: nome da parte, CPF/CNPJ, numero do processo, advogado, tribunal, comarca ou palavra-chave.
 
-Registre processo, tribunal, data, publicação, movimentação, prazo encontrado, link/fonte e resumo. Não invente prazos processuais. Quando houver prazo claro, copie exatamente o prazo encontrado. Quando não houver, marque como 'prazo não localizado'.
+Registre processo, tribunal, data, publicacao, movimentacao, prazo encontrado, link/fonte e resumo. Nao invente prazos processuais. Quando houver prazo claro, copie exatamente o prazo encontrado. Quando nao houver, marque como 'prazo nao localizado'.
 
-Toda publicação, intimação ou prazo deve ser marcada como 'necessita validação humana'.
+Toda publicacao, intimacao ou prazo deve ser marcada como 'necessita validacao humana'.

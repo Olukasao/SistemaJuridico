@@ -1,7 +1,9 @@
-Execute a rotina Astrea.
+Abra o site do Astrea no Chrome.
+Eu vou fazer login manualmente.
+Depois que eu estiver logado, analise a pagina atual do Astrea.
 
-Acesse o Astrea, aguarde login manual se necessário e verifique prazos, tarefas pendentes, tarefas vencidas, publicações, intimações, processos, responsáveis internos, status, datas de vencimento e observações.
+Verifique prazos, tarefas pendentes, tarefas vencidas, publicacoes, intimacoes, processos, responsaveis internos, status, datas de vencimento e observacoes.
 
-Use os prazos do Astrea como referência principal. Não invente prazos processuais. Quando não houver prazo claro, marque como 'prazo não localizado' e sugira prazo interno de até 4 dias corridos para análise humana, deixando claro que não é prazo processual.
+Use os prazos do Astrea como referencia principal. Nao invente prazos processuais. Quando nao houver prazo claro, marque como 'prazo nao localizado' e sugira prazo interno de ate 4 dias corridos para analise humana, deixando claro que nao e prazo processual.
 
-Não altere tarefas, processos ou cadastros sem autorização expressa. Gere relatório final e, se possível, planilha Excel.
+Nao altere tarefas, processos ou cadastros sem autorizacao expressa. Gere relatorio final e, se possivel, planilha Excel.

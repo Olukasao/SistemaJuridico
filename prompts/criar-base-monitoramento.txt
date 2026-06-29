@@ -1,31 +1,35 @@
-Criar ou refazer base inicial de monitoramento jurídico.
+Abra o site do Astrea no Chrome.
+Eu vou fazer login manualmente.
+Depois que eu estiver logado, analise a pagina atual do Astrea.
 
-Acesse primeiro o Astrea e depois o Jusbrasil, aguardando login manual se necessário.
+Depois abra o Jusbrasil no Chrome.
+Eu vou fazer login manualmente, se for necessario.
+Depois que eu estiver logado, analise a pagina atual do Jusbrasil.
 
 Objetivo:
-Mapear as pendências, tarefas, publicações, intimações, movimentações e prazos atualmente existentes, apenas para criar uma base inicial de comparação.
+Criar ou refazer a base inicial de monitoramento juridico, mapeando pendencias, tarefas, publicacoes, intimacoes, movimentacoes e prazos atualmente existentes, apenas para criar uma base inicial de comparacao.
 
 Importante:
-Esta execução serve para criar a base inicial. Não trate os itens encontrados como novas pendências. Eles são apenas o estado atual do sistema.
+Esta execucao serve para criar a base inicial. Nao trate os itens encontrados como novas pendencias. Eles sao apenas o estado atual do sistema.
 
 Verifique no Astrea:
 
 * Prazos cadastrados;
 * Tarefas pendentes;
 * Tarefas vencidas;
-* Publicações;
-* Intimações;
+* Publicacoes;
+* Intimacoes;
 * Processos;
-* Responsáveis;
+* Responsaveis;
 * Status;
 * Datas de vencimento;
-* Observações relevantes.
+* Observacoes relevantes.
 
 Verifique no Jusbrasil:
 
-* Publicações;
-* Intimações;
-* Movimentações;
+* Publicacoes;
+* Intimacoes;
+* Movimentacoes;
 * Processos;
 * Prazos encontrados;
 * Datas;
@@ -37,17 +41,17 @@ id_unico | sistema_origem | cliente_parte | numero_processo | tipo | materia | d
 
 Regras:
 
-* Não inventar prazos.
-* Não tomar decisão jurídica final.
-* Não alterar nada nos sistemas.
-* Não protocolar nada.
-* Não salvar senhas.
-* Não baixar arquivos sem autorização.
+* Nao inventar prazos.
+* Nao tomar decisao juridica final.
+* Nao alterar nada nos sistemas.
+* Nao protocolar nada.
+* Nao salvar senhas.
+* Nao baixar arquivos sem autorizacao.
 * Copiar prazos exatamente como encontrados.
-* Quando não houver prazo, marcar como 'prazo não localizado'.
+* Quando nao houver prazo, marcar como 'prazo nao localizado'.
 
 Ao final:
 
-1. Informar quantos itens foram incluídos na base inicial.
+1. Informar quantos itens foram incluidos na base inicial.
 2. Salvar/gerar a base em formato JSON ou tabela estruturada.
-3. Informar que a partir da próxima verificação devem ser exibidas apenas novas pendências.
+3. Informar que a partir da proxima verificacao devem ser exibidas apenas novas pendencias.
