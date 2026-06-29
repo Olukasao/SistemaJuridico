@@ -9,11 +9,25 @@ on:
 
 jobs:
   build-macos:
-    runs-on: macos-latest
+    name: build-macos-${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64
+            runner: macos-latest
+          - arch: intel
+            runner: macos-15-intel
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Runner info
+        run: |
+          sw_vers
+          uname -m
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -35,16 +49,17 @@ jobs:
         run: |
           test -x dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico
           test -f dist/AssistenteJuridico.app/Contents/Info.plist
+          file dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico
           codesign --verify --deep --strict dist/AssistenteJuridico.app
           dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico --self-test
 
       - name: Package app
         run: |
           cd dist
-          ditto -c -k --sequesterRsrc --keepParent AssistenteJuridico.app AssistenteJuridico_macOS.zip
+          ditto -c -k --sequesterRsrc --keepParent AssistenteJuridico.app AssistenteJuridico_macOS_${{ matrix.arch }}.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AssistenteJuridico_macOS
-          path: dist/AssistenteJuridico_macOS.zip
+          name: AssistenteJuridico_macOS_${{ matrix.arch }}
+          path: dist/AssistenteJuridico_macOS_${{ matrix.arch }}.zip
