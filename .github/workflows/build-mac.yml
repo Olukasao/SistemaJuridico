@@ -52,6 +52,7 @@ jobs:
           file dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico
           codesign --verify --deep --strict dist/AssistenteJuridico.app
           dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico --self-test
+          dist/AssistenteJuridico.app/Contents/MacOS/AssistenteJuridico --ui-smoke-test
 
       - name: Package app
         run: |

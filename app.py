@@ -409,6 +409,48 @@ def run_self_test() -> int:
         return 1
 
 
+def run_ui_smoke_test() -> int:
+    root: tk.Tk | None = None
+    try:
+        ensure_project_files()
+        root = tk.Tk()
+        app = AssistenteJuridicoApp(root)
+        root.update_idletasks()
+        root.update()
+
+        rendered_views = []
+        for tab_key in ("rotinas", "monitoramento", "relatorios", "configuracoes"):
+            app.switch_tab(tab_key)
+            root.update_idletasks()
+            root.update()
+            rendered_views.append(tab_key)
+
+        app.show_prompts_tab()
+        root.update_idletasks()
+        root.update()
+        rendered_views.append("prompts")
+
+        result = {
+            "status": "ok",
+            "platform": platform.system(),
+            "frozen": bool(getattr(sys, "frozen", False)),
+            "window_title": root.title(),
+            "geometry": root.winfo_geometry(),
+            "rendered_views": rendered_views,
+        }
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    except Exception as exc:
+        print(f"UI_SMOKE_TEST_FAILED: {exc}", file=sys.stderr)
+        return 1
+    finally:
+        if root is not None:
+            try:
+                root.destroy()
+            except tk.TclError:
+                pass
+
+
 def formatar_data_hora(iso_value: str | None) -> str:
     if not iso_value:
         return "Nunca"
@@ -2185,4 +2227,6 @@ def main() -> None:
 if __name__ == "__main__":
     if "--self-test" in sys.argv:
         raise SystemExit(run_self_test())
+    if "--ui-smoke-test" in sys.argv:
+        raise SystemExit(run_ui_smoke_test())
     main()
