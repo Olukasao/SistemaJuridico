@@ -29,13 +29,25 @@ def decode_text(encoded_text: str) -> str:
 AUTHOR_NAME = decode_text("THVjYXMgU29hcmVz")
 AUTHOR_URL = decode_text("aHR0cHM6Ly9naXRodWIuY29tL09sdWthc2FvLw==")
 
-BASE_DIR = Path(sys.executable).resolve().parent if getattr(sys, "frozen", False) else Path(__file__).resolve().parent
+APP_FOLDER_NAME = "Assistente-Juridico"
+BUNDLED_DIR = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
+
+
+def get_data_dir() -> Path:
+    if getattr(sys, "frozen", False) and platform.system() == "Darwin":
+        return Path.home() / "Documents" / APP_FOLDER_NAME
+    if getattr(sys, "frozen", False):
+        return Path(sys.executable).resolve().parent
+    return Path(__file__).resolve().parent
+
+
+BASE_DIR = get_data_dir()
 PROMPTS_DIR = BASE_DIR / "prompts"
 REPORTS_DIR = BASE_DIR / "relatorios"
 DEFAULT_EXTERNAL_REPORTS_DIR = (
     Path("C:/Assistente-Juridico/relatorios")
     if platform.system() == "Windows"
-    else Path.home() / "Documents" / "Assistente-Juridico" / "relatorios"
+    else Path.home() / "Documents" / APP_FOLDER_NAME / "relatorios"
 )
 REPORTS_OUTPUT_HINT = str(DEFAULT_EXTERNAL_REPORTS_DIR)
 CONFIG_DIR = BASE_DIR / "configuracoes"
@@ -322,7 +334,12 @@ def ensure_project_files() -> None:
     for filename, content in DEFAULT_PROMPTS.items():
         prompt_path = PROMPTS_DIR / filename
         if not prompt_path.exists():
-            prompt_path.write_text(content.strip() + "\n", encoding="utf-8")
+            bundled_prompt_path = BUNDLED_DIR / "prompts" / filename
+            if bundled_prompt_path.exists():
+                prompt_content = bundled_prompt_path.read_text(encoding="utf-8").strip()
+            else:
+                prompt_content = content.strip()
+            prompt_path.write_text(prompt_content + "\n", encoding="utf-8")
 
 
 def load_config() -> dict:
@@ -2125,4 +2142,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

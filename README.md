@@ -35,6 +35,15 @@ O script gera `dist/AssistenteJuridico.app` e copia o app para a Mesa (`Desktop`
 
 Importante: o build de macOS precisa ser feito em um Mac. O PyInstaller não gera `.app` macOS corretamente a partir do Windows.
 
+Se o macOS exibir erro como **"app danificado"**, **"não pode ser aberto"** ou **"desenvolvedor não verificado"**, remova a quarentena do app baixado e abra novamente:
+
+```bash
+xattr -cr ~/Desktop/AssistenteJuridico.app
+open ~/Desktop/AssistenteJuridico.app
+```
+
+Se o app estiver em outra pasta, troque o caminho no comando. Em alguns Macs também funciona clicar com o botão direito no app e escolher **Abrir**.
+
 ## Abas do aplicativo
 
 - `Rotinas`: copia os prompts jurídicos principais.
