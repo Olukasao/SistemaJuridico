@@ -1,0 +1,53 @@
+Criar ou refazer base inicial de monitoramento jurídico.
+
+Acesse primeiro o Astrea e depois o Jusbrasil, aguardando login manual se necessário.
+
+Objetivo:
+Mapear as pendências, tarefas, publicações, intimações, movimentações e prazos atualmente existentes, apenas para criar uma base inicial de comparação.
+
+Importante:
+Esta execução serve para criar a base inicial. Não trate os itens encontrados como novas pendências. Eles são apenas o estado atual do sistema.
+
+Verifique no Astrea:
+
+* Prazos cadastrados;
+* Tarefas pendentes;
+* Tarefas vencidas;
+* Publicações;
+* Intimações;
+* Processos;
+* Responsáveis;
+* Status;
+* Datas de vencimento;
+* Observações relevantes.
+
+Verifique no Jusbrasil:
+
+* Publicações;
+* Intimações;
+* Movimentações;
+* Processos;
+* Prazos encontrados;
+* Datas;
+* Tribunal;
+* Link/fonte.
+
+Para cada item localizado, monte uma base com:
+id_unico | sistema_origem | cliente_parte | numero_processo | tipo | materia | data_encontrada | prazo_encontrado | resumo | link_fonte | hash_conteudo
+
+Regras:
+
+* Não inventar prazos.
+* Não tomar decisão jurídica final.
+* Não alterar nada nos sistemas.
+* Não protocolar nada.
+* Não salvar senhas.
+* Não baixar arquivos sem autorização.
+* Copiar prazos exatamente como encontrados.
+* Quando não houver prazo, marcar como 'prazo não localizado'.
+
+Ao final:
+
+1. Informar quantos itens foram incluídos na base inicial.
+2. Salvar/gerar a base em formato JSON ou tabela estruturada.
+3. Informar que a partir da próxima verificação devem ser exibidas apenas novas pendências.

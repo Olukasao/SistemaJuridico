@@ -1,0 +1,7 @@
+Execute a rotina Jusbrasil.
+
+Acesse o Jusbrasil, aguarde login manual se necessário e consulte publicações, intimações, movimentações e processos usando os dados fornecidos pela advogada: nome da parte, CPF/CNPJ, número do processo, advogado, tribunal, comarca ou palavra-chave.
+
+Registre processo, tribunal, data, publicação, movimentação, prazo encontrado, link/fonte e resumo. Não invente prazos processuais. Quando houver prazo claro, copie exatamente o prazo encontrado. Quando não houver, marque como 'prazo não localizado'.
+
+Toda publicação, intimação ou prazo deve ser marcada como 'necessita validação humana'.

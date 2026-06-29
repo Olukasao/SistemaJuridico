@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# PyInstaller/build artifacts
+build/
+dist/
+release/
+*.spec
+
+# Generated runtime folders
+backups/
+relatorios/
+
+# Local runtime configs
+configuracoes/config.json
+configuracoes/monitoramento.json
+configuracoes/snapshot_pendencias.json
+
+# Keep config folder placeholder
+!configuracoes/.gitkeep
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Logs
+*.log
