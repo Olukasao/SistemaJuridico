@@ -544,7 +544,8 @@ def find_claude_shortcut() -> str:
         if not root.exists():
             continue
         try:
-            for shortcut in root.rglob("*"):
+            shortcuts = root.iterdir() if platform.system() == "Darwin" else root.rglob("*")
+            for shortcut in shortcuts:
                 name = shortcut.name.lower()
                 valid_suffixes = (".lnk", ".url") if platform.system() == "Windows" else (".app", ".desktop")
                 if shortcut.suffix.lower() in valid_suffixes and ("claude" in name or "cowork" in name):
